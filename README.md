@@ -1,2 +1,3 @@
 # oop_arhal_testing
-oop_arhal
+School project from OOP-based subject.
+(vsetky veci spojene s objednavkou tovaru s vyuzitim OOP principov)
