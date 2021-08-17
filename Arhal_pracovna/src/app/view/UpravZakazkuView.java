@@ -14,7 +14,7 @@ public class UpravZakazkuView {
 	public VBox vyrobkyBox;
 	public Text cena;
 	
-	public Button pridajPostel = new Button("Pridaj postel");
+	public Button pridajManzPostel = new Button("Pridaj mazelsku postel");
 	public Button pridajKonStol = new Button("Pridaj konferecny stol");
 	public Button pridajKuchStol = new Button("Pridaj kuchynsky stol");
 	public Button pridajPracStol = new Button("Pridaj pracovny stol");
@@ -23,16 +23,19 @@ public class UpravZakazkuView {
 	public Button pridajKniznicu = new Button("Pridaj kniznicu");
 	public Button pridajRegal = new Button("Pridaj regal");
 	public Button pridajPolicu = new Button("Pridaj policu");
+	public Button pridajJednoPostel = new Button("Pridaj jednopostel");
 	
 	public UpravZakazkuView() {
 		ScrollPane pane = new ScrollPane();
 		box = new VBox();
 		pane.setContent(box);
+		box.setSpacing(8);
+		box.setTranslateX(8);
 		
-		nazov = new Text("");
+		nazov = new Text("Uprava zakazky");
+
 		box.getChildren().add(nazov);
 		
-		box.getChildren().add(pridajPostel);
 		box.getChildren().add(pridajKonStol);
 		box.getChildren().add(pridajKuchStol);
 		box.getChildren().add(pridajPracStol);
@@ -41,12 +44,13 @@ public class UpravZakazkuView {
 		box.getChildren().add(pridajRegal);
 		box.getChildren().add(pridajPolicu);
 		box.getChildren().add(pridajKniznicu);
-		
+		box.getChildren().add(pridajManzPostel);
+		box.getChildren().add(pridajJednoPostel);
+				
 		box.getChildren().add(new Text("Vyrobky: "));
 		vyrobkyBox = new VBox();
 		box.getChildren().add(vyrobkyBox);
 		
-		//box.getChildren().add(new Text("Upravit zakazku:"));
 		
 		cena = new Text("Cena: 0.00 €");
 		box.getChildren().add(cena);

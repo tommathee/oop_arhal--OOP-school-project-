@@ -1,11 +1,11 @@
 package app.vyrobky_model;
 
-public abstract class NosnyNabytok extends Vyrobky {
+public abstract class NosnyNabytok extends Vyrobky implements Nosnost {
 	
 	private String typ = "";
-	private double nosnost;
+	private int nosnost = 0;
 	
-	public NosnyNabytok(String nazov, double cena, String typ, double nosnost){
+	public NosnyNabytok(String nazov, double cena, String typ, int nosnost){
 		super(nazov, cena);
 		this.setTyp(typ);
 	}
@@ -22,7 +22,7 @@ public abstract class NosnyNabytok extends Vyrobky {
 		return nosnost;
 	}
 
-	public void setNosnost(double nosnost) {
+	public void setNosnost(int nosnost) {
 		this.nosnost = nosnost;
 	}
 

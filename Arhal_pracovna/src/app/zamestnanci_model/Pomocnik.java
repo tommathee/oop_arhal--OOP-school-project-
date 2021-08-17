@@ -1,19 +1,12 @@
 package app.zamestnanci_model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Pomocnik extends Zamestnanci {
 	
-	private List<Observer> observers = new ArrayList<Observer>();
 	private boolean priprav = false;
 	private String produkt;
 	
-	
-	public void attach(Observer observer) {
-		observers.add(observer);
-	}
-	
+	 
 	public boolean isPriprav() {
 		return priprav;
 	}
@@ -28,14 +21,7 @@ public class Pomocnik extends Zamestnanci {
 
 	public void setProdukt(String produkt) {
 		this.produkt = produkt;
-		notifyAllObervers();
+		System.out.println("Pripravujem material na vyrobu: " + this.getProdukt());
 	}
 	
-	
-	private void notifyAllObervers() {
-		for (Observer observer : observers) {
-			observer.update();
-		}
-	}
-
 }

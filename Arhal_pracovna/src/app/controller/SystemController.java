@@ -8,18 +8,25 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import app.view.SystemView;
-import app.view.UpravZakazkuView;
+import app.view.*;
 import app.zakazky_model.Objednavky;
 import app.zakazky_model.Zakazka;
+import app.zamestnanci_model.*;
 
 
 public class SystemController {
-	
-	SystemView view;
 
+	SystemView view;
+	private ArrayList<Zamestnanci> zamestnanci = new ArrayList<>();
+
+	/**
+	 * nastavenie okna a akcii s nimi spojenymi
+	 * @param view
+	 */
 	public SystemController(SystemView view) {
 		this.view = view;
+		
+		initialize();
 		
         view.refresh.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
@@ -29,13 +36,25 @@ public class SystemController {
         
         view.novaZakazkaButt.setOnAction((actionEvent) -> {
             Zakazka demo = new Zakazka();
-            //demo.getVyrobky().add(new KonferecnyStol("Orech", 100, "Nizky"));
-
             Objednavky.getInstance().zakazka.add(demo);
             refreshZakazky();
         });
 	}
 	
+	/**
+	 * pridanie zamestnancov do arraylistu
+	 */
+	private void initialize() {		
+		zamestnanci.add(new Pomocnik());
+		zamestnanci.add(new Zvarac());
+		zamestnanci.add(new Lakovnik());
+		zamestnanci.add(new Monter());
+		zamestnanci.add(new Stolar());
+	}
+
+	/**
+	 * nastavenia tlacidiel v okne a vypisov
+	 */
 	public void refreshZakazky() {
 		ArrayList<Zakazka> zakazka = Objednavky.getInstance().zakazka;
 		ArrayList<Node> nodes = new ArrayList<>();
@@ -73,16 +92,30 @@ public class SystemController {
 			Button make = new Button("Posli na vyrobu");
 			nodes.add(make);
 			make.setOnAction(e -> {
-				try {
-					//pomocnik.setProdukt("Postel");
-					z.posliNaVyrobu();
-					Objednavky.getInstance().zakazka.remove(z);
+				
+				//nove okno
+				Stage stage = new Stage();
+				ProcesVyrobyView view =  new ProcesVyrobyView();
+				ProcesVyrobyController vyroba = new ProcesVyrobyController(z, zamestnanci);
+				stage.setScene(view.getScene());
+				stage.show();
+				stage.setWidth(700);
+				stage.setHeight(300);
+						
+				try {				
+					vyroba.pripravVyrobu();
+					System.out.println("Vyrobena");	
+					
 				} catch (Exception e1) {
-					System.out.println("Prazdna zakazka, nemozem poslat do vyroby.");
+
+					System.out.println("Prazdna zakazka, nemozem poslat do vyroby !!!");
 					e1.printStackTrace();
 				}
-				if (z.isVyrobena()) System.out.println("Vyrobena");
-	
+				if (z.isVyrobena()) {					
+					z.getVyrobky().clear();
+					Objednavky.getInstance().zakazka.remove(z);
+				}
+		
 			});
 
 		}

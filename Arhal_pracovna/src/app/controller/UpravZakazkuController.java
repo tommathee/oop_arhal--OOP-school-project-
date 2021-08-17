@@ -1,7 +1,6 @@
 package app.controller;
 
 import java.util.stream.Collectors;
-
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -9,26 +8,35 @@ import app.vyrobky_model.*;
 import app.view.UpravZakazkuView;
 import app.zakazky_model.Zakazka;
 
-import java.util.stream.Collectors;
 
 public class UpravZakazkuController {
 	
 	UpravZakazkuView view;
 	Zakazka upravena;
 	
+	/**
+	 * konstruktor ktory priraduje kazdemu tlacidlu jeho funkciu na pridanie daneho vyrobku do zakazky
+	 * @param v
+	 * @param upravena
+	 */
 	public UpravZakazkuController(UpravZakazkuView v, Zakazka upravena) {
 		view = v;
 		this.upravena = upravena;
 		
-		view.pridajPostel.setOnAction(e -> {
-			upravena.getVyrobky().add(new Postele(" ", 150));
+		view.pridajManzPostel.setOnAction(e -> {
+			upravena.getVyrobky().add(new ManzelskaPostel(null, 0, null, 0));
+			refreshVyrobky();
+		});
+		
+		view.pridajJednoPostel.setOnAction(e -> {
+			upravena.getVyrobky().add(new JednoPostel(null, 0, null, 0));
 			refreshVyrobky();
 		});
 		
 		view.pridajBarStolicku.setOnAction(e -> {
 			upravena.getVyrobky().add(new BarovaStolicka(null, 0, null));
 			refreshVyrobky();
-		});
+		});	
 				
 		view.pridajJedStolicku.setOnAction(e -> {
 			upravena.getVyrobky().add(new JedalenskaStolicka(null, 0, null));
@@ -68,6 +76,9 @@ public class UpravZakazkuController {
 		refreshVyrobky();
 	}
 	
+	/**
+	 * refresh je potrebny aby sa aktualizovalo okno s novou zakazkou
+	 */
 	public void refreshVyrobky(){
 		
         view.vyrobkyBox.getChildren().setAll(
@@ -95,9 +106,7 @@ public class UpravZakazkuController {
             sum += v.getCena();
         }
 
-        view.cena.setText("Cena : " + Double.toString(sum) + " + €");
-        
-		
+        view.cena.setText("Cena : " + Double.toString(sum) + " + €");	
 	}
 
 }

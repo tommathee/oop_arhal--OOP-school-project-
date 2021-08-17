@@ -19,6 +19,7 @@ public class SystemView {
         pane = new ScrollPane();
         box = new VBox();
         box.setSpacing(10);
+        box.setTranslateX(10);
         pane.setContent(box);
 
         refresh = new Button("Refresh");

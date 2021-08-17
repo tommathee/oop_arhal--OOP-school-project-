@@ -1,14 +1,29 @@
 package app.vyrobky_model;
 
-public class Postele extends Vyrobky {
+public abstract class Postele extends Vyrobky implements Nosnost {
 	
-	public String typ = "";
-	public int nosnost;
+	private String typ = "";
+	private int nosnost = 0;
 	
-	public Postele(String typ, int nosnost){
-		super("Postel", 200);
-		this.typ = typ;
-		this.nosnost = nosnost;
+	public Postele(String nazov, double cena, String typ, int nosnost){
+		super(nazov, cena);
+		this.setTyp(typ);
 	}
 
+	public String getTyp() {
+		return typ;
+	}
+
+	public void setTyp(String typ) {
+		this.typ = typ;
+	}
+
+	public double getNosnost() {
+		return nosnost;
+	}
+
+	public void setNosnost(int nosnost) {
+		this.nosnost = nosnost;
+	}
+	
 }

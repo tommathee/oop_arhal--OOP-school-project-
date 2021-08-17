@@ -2,9 +2,14 @@ package app.vyrobky_model;
 
 public class Regal extends NosnyNabytok {
 
-	public Regal(String nazov, double cena, String typ, double nosnost) {
+	public Regal(String nazov, double cena, String typ, int nosnost) {
 		super("Regal", 80, typ, nosnost);
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void upozorniNaNosnost() {
+		this.setNosnost(70);
+		
 	}
 
 }
